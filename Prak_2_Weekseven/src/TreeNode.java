@@ -1,7 +1,9 @@
+
 import java.util.ArrayList;
+
 /**
  *
- * @author Rey
+ * @author yohan
  */
 public class TreeNode {
 
@@ -39,14 +41,14 @@ public class TreeNode {
      */
     void add_child(TreeNode new_child, double distance) {
         new_child.set_parent(this);
-        new_child.distance=distance;
+        new_child.distance = distance;
 
     }
 
     /* Simply remove child from this node's children */
     void remove_child(TreeNode child) {
         child.set_parent(this);
-        distance=child.distance;
+        distance = child.distance;
         this.children.remove(child);
     }
 
@@ -54,10 +56,10 @@ public class TreeNode {
     * for each of this node's children, recursively call child's print method
      */
     void print(String spaces, double distance) {
-        System.out.println(data + " distance from parent : "+ this.distance + " distance from initial node " +(distance
+        System.out.println(data + " distance from parent : " + this.distance + " distance from initial node " + (distance
                 + this.distance));
         for (int i = 0; i < this.children.size(); i++) {
-            this.children.get(i).print(" ", this.distance);
+            this.children.get(i).print(" ", (this.distance + distance));
         }
     }
 
