@@ -115,10 +115,12 @@ public class BinaryTree {
         while (current != null) {
             if (current.data == id) {
                 return true;
-            } else if (current.data > id) {
-                current = current.left;
-            } else {
+            }
+            if (id > current.data) {
                 current = current.right;
+            }
+            if (id < current.data) {
+                current = current.left;
             }
         }
         return false;

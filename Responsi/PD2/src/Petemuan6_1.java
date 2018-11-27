@@ -29,8 +29,8 @@ public class Petemuan6_1 {
         addToTree(4);
         addToTree(1);
         addToTree(2);
-        System.out.println(root.data);
-        System.out.println(root.left.left.right.data);
+        printNode("", "Root : ", root);
+        findNode(2);
     }
 
     public static void addToTree(float number) {
@@ -58,5 +58,39 @@ public class Petemuan6_1 {
                 }
             }
         }
+    }
+
+    public static void printNode(String space, String prefix, NodeTree node) {
+        System.out.println(space + prefix + node.data);
+        if (node.left != null) {
+            printNode(space + " ", "L : ", node.left);
+        }
+        if (node.right != null) {
+            printNode(space + " ", "R : ", node.right);
+        }
+    }
+
+    public static void findNode(float data) {
+        NodeTree cari = findNodeTree(root, data);
+        if (cari != null) {
+            System.out.println(cari.data);
+        } else {
+            System.out.println("Tidak ditemukan");
+        }
+    }
+
+    public static NodeTree findNodeTree(NodeTree node, float data) {
+        while (node != null) {
+            if (node.data == data) {
+                return node;
+            }
+            if (data > node.data) {
+                node = node.right;
+            }
+            if (data < node.data) {
+                node = node.left;
+            }
+        }
+        return null;
     }
 }
