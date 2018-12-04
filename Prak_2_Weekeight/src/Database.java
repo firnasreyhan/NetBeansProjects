@@ -20,35 +20,63 @@ public class Database {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/praktikum", "root", "");
             Statement stmt = conn.createStatement();
-            int nilai = 0;
-            String nama = "";
-            String lagi = "";
-            Scanner scan = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
+            boolean cek = true;
             do {
-                System.out.println("Masukkan nama: ");
-                nama = scan.nextLine();
-                System.out.println("Masukkan score: ");
-                nilai = scan.nextInt();
-                System.out.print("lagi?(y/t): ");
-                scan.nextLine();
-                lagi = scan.nextLine();
-                sql = "INSERT INTO person(name, score) VALUES('" + nama + "','" + nilai + "')";
-                stmt.executeUpdate(sql);
-//                sql = "UPDATE person SET score=60, name=\"Tono Martono \" WHERE id=1";
-//                stmt.executeUpdate(sql);
-//                sql = "DELETE FROM person WHERE id=2";
-//                stmt.executeUpdate(sql);
+                int nilai = 0, pilih = 0;
+                String nama = "";
+                String lagi = "";
+                String id = "";
                 sql = "SELECT id, name, score FROM person order by id";
-
-            } while (lagi.equalsIgnoreCase("y"));
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                int score = rs.getInt("score");
-                System.out.println(id + "\t" + name + "\t"
-                        + score);
-            }
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    int idd = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int score = rs.getInt("score");
+                    System.out.println(idd + "\t" + name + "\t"
+                            + score);
+                }
+                System.out.println("===========================================");
+                System.out.println("1. Create");
+                System.out.println("2. Update");
+                System.out.println("3. Delete");
+                System.out.println("4. Keluar");
+                System.out.print("Pilih : ");
+                pilih = sc.nextInt();
+                switch (pilih) {
+                    case 1:
+                        System.out.print("Masukkan nama : ");
+                        sc.nextLine();
+                        nama = sc.nextLine();
+                        System.out.print("Masukkan score : ");
+                        nilai = sc.nextInt();
+                        sql = "INSERT INTO person(name, score) VALUES('" + nama + "','" + nilai + "')";
+                        stmt.executeUpdate(sql);
+                        break;
+                    case 2:
+                        System.out.print("Masukkan id : ");
+                        sc.nextLine();
+                        id = sc.nextLine();
+                        System.out.print("Masukkan nama : ");
+                        nama = sc.nextLine();
+                        System.out.print("Masukkan score : ");
+                        nilai = sc.nextInt();
+                        sql = "UPDATE person SET score='" + nilai + "', name='" + nama + "' WHERE id='" + id + "'";
+                        stmt.executeUpdate(sql);
+                        break;
+                    case 3:
+                        System.out.print("Masukkan id : ");
+                        sc.nextLine();
+                        id = sc.nextLine();
+                        sql = "DELETE FROM person WHERE id = '" + id + "'";
+                        stmt.executeUpdate(sql);
+                        break;
+                    case 4:
+                        cek = false;
+                        break;
+                }
+                System.out.println("");
+            } while (cek);
         } catch (Exception e) {
             System.out.println(e);
         }
