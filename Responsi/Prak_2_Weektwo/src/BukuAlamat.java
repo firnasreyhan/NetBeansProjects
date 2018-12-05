@@ -29,7 +29,6 @@ public class BukuAlamat {
     public static void main(String[] args) {
         Hashtable<Integer, BukuAlamat> buku_alamat = new Hashtable<Integer, BukuAlamat>();
         ArrayList<Integer> v;
-        int[] a;
         int h = 0;
 
         buku_alamat.put(1, new BukuAlamat("Reyhan", "Kesatrian", "Blimbing", "65121"));
