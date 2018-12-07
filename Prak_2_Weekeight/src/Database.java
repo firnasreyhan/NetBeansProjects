@@ -40,7 +40,8 @@ public class Database {
                 System.out.println("1. Create");
                 System.out.println("2. Update");
                 System.out.println("3. Delete");
-                System.out.println("4. Keluar");
+                System.out.println("4. Filter");
+                System.out.println("5. Keluar");
                 System.out.print("Pilih : ");
                 pilih = sc.nextInt();
                 switch (pilih) {
@@ -72,6 +73,11 @@ public class Database {
                         stmt.executeUpdate(sql);
                         break;
                     case 4:
+                        System.out.print("Masukkan nama : ");
+                        sc.nextLine();
+                        nama = sc.nextLine();
+                        break;
+                    case 5:
                         cek = false;
                         break;
                 }
