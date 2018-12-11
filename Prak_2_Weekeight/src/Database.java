@@ -1,4 +1,3 @@
-
 import java.sql.*;
 import java.util.Scanner;
 
@@ -29,6 +28,7 @@ public class Database {
                 String id = "";
                 sql = "SELECT id, name, score FROM person order by id";
                 ResultSet rs = stmt.executeQuery(sql);
+                System.out.println("===========================================");
                 while (rs.next()) {
                     int idd = rs.getInt("id");
                     String name = rs.getString("name");
@@ -42,8 +42,10 @@ public class Database {
                 System.out.println("3. Delete");
                 System.out.println("4. Filter");
                 System.out.println("5. Keluar");
+                System.out.println("===========================================");
                 System.out.print("Pilih : ");
                 pilih = sc.nextInt();
+                System.out.println("===========================================");
                 switch (pilih) {
                     case 1:
                         System.out.print("Masukkan nama : ");
@@ -76,6 +78,13 @@ public class Database {
                         System.out.print("Masukkan nama : ");
                         sc.nextLine();
                         nama = sc.nextLine();
+                        sql = "SELECT * FROM person WHERE name ='" + nama + "'";
+                        rs = stmt.executeQuery(sql);
+                        while (rs.next()) {
+                            System.out.println("ID\t: " + rs.getString("id") + "\n"
+                                    + "Nama\t: " + rs.getString("name") + "\n"
+                                    + "Score\t: " + rs.getString("score"));
+                        }
                         break;
                     case 5:
                         cek = false;
